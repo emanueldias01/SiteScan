@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"net/http"
 )
 
 func main(){
@@ -13,6 +14,7 @@ func main(){
 	switch opcao{
 	case 1:
 		fmt.Println("Escaneando sites...")
+		escanearSites()
 	case 2:
 		fmt.Println("Exibindo logs...")
 	case 0:
@@ -49,4 +51,22 @@ func obterOpcao() int{
 	var opcao int
 	fmt.Scan(&opcao)
 	return opcao
+}
+
+func escanearSites(){
+	sites := []string{"https://youtube.com", "https://instagram.com","https://httpbin.org/status/404"}
+
+	for _, site := range sites{
+		resp, err := http.Get(site)
+
+		if err != nil{
+			fmt.Println("Ocorreu um erro:", err)
+		}
+
+		if(resp.StatusCode == 200){
+			fmt.Println("O site", site, "está online!")
+		} else{
+			fmt.Println("O site", site, "está fora do ar!")
+		}
+	}
 }
