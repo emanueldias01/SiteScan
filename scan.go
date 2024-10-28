@@ -22,6 +22,7 @@ func main(){
 		escanearSites(abreArquivo())
 	case 2:
 		fmt.Println("Exibindo logs...")
+		devolveLogs()
 	case 0:
 		fmt.Println("Saindo do programa...")
 		os.Exit(0)
@@ -123,4 +124,14 @@ func escreveLogs(site string,online bool){
 	arquivo.WriteString(time.Now().Format("02/01/2006-15:04:05") + " Site:" + site + " online:" + strconv.FormatBool(online) + "\n")
 
 	arquivo.Close()
+}
+
+func devolveLogs(){
+	arquivo, err := os.ReadFile("logs.txt")
+
+	if err != nil{
+		fmt.Println("Ocorreu um erro:", err)
+	
+	}
+	fmt.Println(string(arquivo))
 }
