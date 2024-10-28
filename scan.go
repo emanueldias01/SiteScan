@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"os"
+	"io"
 	"net/http"
+	"os"
+	"strings"
 )
 
 func main(){
@@ -14,7 +17,7 @@ func main(){
 	switch opcao{
 	case 1:
 		fmt.Println("Escaneando sites...")
-		escanearSites()
+		escanearSites(abreArquivo())
 	case 2:
 		fmt.Println("Exibindo logs...")
 	case 0:
@@ -52,9 +55,31 @@ func obterOpcao() int{
 	fmt.Scan(&opcao)
 	return opcao
 }
+func abreArquivo() []string{
+	var sites []string
+	arquivo, err := os.Open("sites.txt")
 
-func escanearSites(){
-	sites := []string{"https://youtube.com", "https://instagram.com","https://httpbin.org/status/404"}
+	if err != nil{
+		fmt.Println("Ocorreu um erro:", err)
+	}
+
+	leitor := bufio.NewReader(arquivo)
+
+	for{
+		linha, err := leitor.ReadString('\n')
+		linha = strings.TrimSpace(linha)
+
+		sites = append(sites, linha)
+
+		if err == io.EOF{
+			break
+		}
+	}
+	arquivo.Close()
+	return sites
+}
+
+func escanearSites(sites []string){
 
 	for _, site := range sites{
 		resp, err := http.Get(site)
