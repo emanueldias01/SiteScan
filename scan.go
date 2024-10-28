@@ -12,23 +12,29 @@ import (
 )
 
 func main(){
+	
 	saudacoes()
-	exibeMenu()
-	opcao := obterOpcao()
 
-	switch opcao{
-	case 1:
-		fmt.Println("Escaneando sites...")
-		escanearSites(abreArquivo())
-	case 2:
-		fmt.Println("Exibindo logs...")
-		devolveLogs()
-	case 0:
-		fmt.Println("Saindo do programa...")
-		os.Exit(0)
-	default:
-		fmt.Println("Não conheço esse comando")
-		os.Exit(-1)
+	for{
+
+		exibeMenu()
+		opcao := obterOpcao()
+
+
+		switch opcao{
+		case 1:
+			fmt.Println("Escaneando sites...")
+			escanearSites(abreArquivo())
+		case 2:
+			fmt.Println("Exibindo logs...")
+			devolveLogs()
+		case 0:
+			fmt.Println("Saindo do programa...")
+			os.Exit(0)
+		default:
+			fmt.Println("Não conheço esse comando")
+			os.Exit(-1)
+		}
 	}
 
 }
