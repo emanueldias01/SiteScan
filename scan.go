@@ -11,8 +11,11 @@ import (
 	"time"
 )
 
+const quantidadeTestes = 5
+const tempoDelay = 5
+
 func main(){
-	
+
 	saudacoes()
 
 	for{
@@ -90,12 +93,12 @@ func abreArquivo() []string{
 }
 
 func escanearSites(sites []string){
-	for i:= 0; i < 5; i++{
+	for i:= 0; i < quantidadeTestes; i++{
 		fmt.Println("teste", i+1)
 		for _, site := range sites{
 				testaSite(site)
 				fmt.Println()
-				time.Sleep(5 * time.Second)
+				time.Sleep(tempoDelay * time.Second)
 			}		
 	}
 }
