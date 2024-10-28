@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 func main(){
@@ -81,9 +82,18 @@ func abreArquivo() []string{
 }
 
 func escanearSites(sites []string){
+	for i:= 0; i < 5; i++{
+		fmt.Println("teste", i+1)
+		for _, site := range sites{
+				testaSite(site)
+				fmt.Println()
+				time.Sleep(5 * time.Second)
+			}		
+	}
+}
 
-	for _, site := range sites{
-		resp, err := http.Get(site)
+func testaSite(site string){
+	resp, err := http.Get(site)
 
 		if err != nil{
 			fmt.Println("Ocorreu um erro:", err)
@@ -92,9 +102,9 @@ func escanearSites(sites []string){
 
 		if(resp.StatusCode == 200){
 			fmt.Println("O site", site, "está online!")
+			fmt.Println("status:", resp.StatusCode)
 		} else{
 			fmt.Println("O site", site, "está fora do ar!")
 			fmt.Println("status:", resp.StatusCode)
 		}
-	}
 }
