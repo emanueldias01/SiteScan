@@ -61,6 +61,7 @@ func abreArquivo() []string{
 
 	if err != nil{
 		fmt.Println("Ocorreu um erro:", err)
+		os.Exit(-1)
 	}
 
 	leitor := bufio.NewReader(arquivo)
@@ -86,12 +87,14 @@ func escanearSites(sites []string){
 
 		if err != nil{
 			fmt.Println("Ocorreu um erro:", err)
+			os.Exit(-1)
 		}
 
 		if(resp.StatusCode == 200){
 			fmt.Println("O site", site, "está online!")
 		} else{
 			fmt.Println("O site", site, "está fora do ar!")
+			fmt.Println("status:", resp.StatusCode)
 		}
 	}
 }
