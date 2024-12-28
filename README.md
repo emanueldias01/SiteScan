@@ -1,5 +1,4 @@
 # SiteScan
-<<<<<<< HEAD
 
 **SiteScan** é uma ferramenta de linha de comando (CLI) escrita em Go, projetada para verificar se websites estão online ou offline. Ela lê uma lista de sites de um arquivo de texto e faz uma verificação de status para cada um deles, gerando logs para documentar o resultado.
 
